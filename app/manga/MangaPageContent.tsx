@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMangas } from "../hooks/useMangas";
 import { ListManga } from "./ListManga";
 import { NavPaging } from "./NavPaging";
+import { LatestUpdates } from "../components/home/LatestUpdates/LatestUpdates";
 
 type MangaPageContentTypes = {
   pageParam?: string;
@@ -38,10 +39,9 @@ export function MangaPageContent({ pageParam }: MangaPageContentTypes) {
   return (
     <div className="min-h-screen bg-gray-900 px-4 py-10 mt-[70px]">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-sm font-bold text-gray-500 dark:text-gray-300 mb-4">
-          TRUYENTRANH Chính thức - Đọc truyện tranh miễn phí
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <div className="flex items-center justify-between mb-8">
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-6">
           <ListManga mangas={mangas} />
         </div>
       </div>

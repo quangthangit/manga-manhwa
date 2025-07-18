@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useLatestMangas } from "@/app/hooks/useLatestMangas";
-import { LatestUpdateItem } from "./LatestUpdateItem";
 import Image from "next/image";
 import formatTimeAgo from "@/app/until/formatTimeAgo";
 
@@ -12,10 +11,10 @@ export const LatestUpdates = () => {
   return (
     <>
       {loading
-        ? Array.from({ length: 12 }).map((_, idx) => (
+        ? Array.from({ length: 16 }).map((_, idx) => (
             <div
               key={idx}
-              className="h-28 p-4 bg-gray-800 rounded-lg animate-pulse"
+              className="h-54 p-4 bg-gray-800 rounded-lg animate-pulse"
             ></div>
           ))
         : mangas.map((manga, index) => (
@@ -35,7 +34,9 @@ export const LatestUpdates = () => {
                 </h3>
                 <div className="flex justify-between">
                   <p className="text-gray-400 text-xs">
-                    Ch. {manga.chaptersLatest[0].chapter_name}
+                    {
+                      manga.chaptersLatest!=null ? <>Ch. {manga.chaptersLatest[0].chapter_name}</> : <>Ch...</>
+                    }
                   </p>
                   <p className="text-gray-400 text-xs">
                     {formatTimeAgo(manga.updatedAt)}

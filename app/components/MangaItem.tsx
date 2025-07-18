@@ -1,52 +1,35 @@
+import formatTimeAgo from "@/app/until/formatTimeAgo";
 import Image from "next/image";
 
 type MangaItemType = {
-  name?: string;
-  image?: string;
-  title?: string;
-  team?: string;
-  description?: string;
-  chapter?: number;
-  clickHandle?: () => void;
+  thumb_url: string;
+  name: string;
+  updatedAt: string;
 };
-
-export const MangaItem = ({
-  clickHandle,
-  name,
-  image,
-  title = "Hiện tại mình chưa update",
-  team,
-  description = "Hiện tại mình chưa update, xin lỗi nhaaaaa!!!!!",
-  chapter,
-}: MangaItemType) => {
+export const MangaItem = ({ name, thumb_url, updatedAt }: MangaItemType) => {
   return (
-    <div
-      onClick={clickHandle}
-      className="group cursor-pointer flex flex-col rounded-[10px] overflow-hidden"
-    >
-      <div className="relative aspect-[2/3] w-full">
-        <Image
-          src={`https://img.otruyenapi.com/uploads/comics/${image}` || ""}
-          alt={title || "No image"}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-100"
-          sizes="(max-width: 768px) 100vw, 200px"
-        />
-        <div className="absolute inset-0 z-10 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-start px-3 text-white text-sm">
-          <p className="font-semibold">Ch. {chapter}</p>
-          <p className="text-xs mt-1">{team}</p>
-          <p className="text-xs mt-1 italic line-clamp-3">{description}</p>
-          <button
-            type="button"
-            className="bg-gray-100 text-black hover:bg-gray-200 mt-4 py-2 px-4 rounded-md text-sm font-medium"
-          >
-            Đọc ngay
-          </button>
+    <div className="bg-gray-600 hover:bg-gray-500 rounded-lg shadow p-4 flex gap-4">
+      <Image
+        height={100}
+        width={100}
+        src={`https://img.otruyenapi.com/uploads/comics/${thumb_url}`}
+        alt={thumb_url}
+        className="w-20 h-28 object-cover rounded-md"
+      />
+      <div className="flex flex-col justify-between">
+        <div>
+          <h3 className="font-semibold text-white line-clamp-2">
+            {name}
+          </h3>
+          {/* <p className="text-xs text-gray-400">
+            Thể loại : {comicItem.category[0].name || "unknow"}
+          </p> */}
+          {/* <p className="text-xs text-gray-400">{comicItem.status || "unknow"}</p> */}
         </div>
+        <p className="text-xs text-gray-400">
+          {formatTimeAgo(updatedAt)}
+        </p>
       </div>
-      <h3 className="mt-2 px-1 text-sm text-left text-white dark:text-white font-semibold line-clamp-2">
-        {name}
-      </h3>
     </div>
   );
 };

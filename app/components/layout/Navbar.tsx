@@ -28,7 +28,7 @@ export const Navbar = () => {
               Home
             </Link>
             <Link href="/manga" className="hover:text-white transition">
-              All Manga
+              Manga
             </Link>
             <Link href="/about" className="hover:text-white transition">
               About
