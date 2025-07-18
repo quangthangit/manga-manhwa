@@ -84,9 +84,9 @@ export const Banner = () => {
   return (
     <>
       <Carousel>
-        <CarouselContent className="-ml-1">
+        <CarouselContent className="">
           {data.map((_, index) => (
-            <CarouselItem key={index} className="pl-1 w-full">
+            <CarouselItem key={index} className="w-full">
               <div className="w-full">
                 <div className="relative">
                   <div
@@ -190,8 +190,6 @@ export const Banner = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </>
   );
