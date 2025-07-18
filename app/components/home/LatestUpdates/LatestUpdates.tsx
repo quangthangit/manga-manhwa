@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useLatestMangas } from "@/app/hooks/useLatestMangas";
 import { LatestUpdateItem } from "./LatestUpdateItem";
+import Image from "next/image";
+import formatTimeAgo from "@/app/until/formatTimeAgo";
 
 export const LatestUpdates = () => {
   const { loading, mangas } = useLatestMangas();
@@ -18,11 +20,28 @@ export const LatestUpdates = () => {
           ))
         : mangas.map((manga, index) => (
             <Link href={`/manga/${manga.slug}`} key={index}>
-              <LatestUpdateItem
-                name={manga.name}
-                thumb_url={manga.thumb_url}
-                updatedAt={manga.updatedAt}
-              />
+              <div className="group cursor-pointer">
+                <div className="relative aspect-[2/3] rounded-lg overflow-hidden mb-2">
+                  <Image
+                    src={`https://img.otruyenapi.com//uploads/comics/${manga.thumb_url}`}
+                    alt={`Popular manga`}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                </div>
+                <h3 className="text-white text-sm font-medium truncate group-hover:text-blue-400 transition-colors">
+                  {manga.name}
+                </h3>
+                <div className="flex justify-between">
+                  <p className="text-gray-400 text-xs">
+                    Ch. {manga.chaptersLatest[0].chapter_name}
+                  </p>
+                  <p className="text-gray-400 text-xs">
+                    {formatTimeAgo(manga.updatedAt)}
+                  </p>
+                </div>
+              </div>
             </Link>
           ))}
     </>

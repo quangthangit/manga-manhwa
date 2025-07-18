@@ -6,7 +6,7 @@ type MangaItemType = {
   title?: string;
   team?: string;
   description?: string;
-  chapter?: string;
+  chapter?: number;
   clickHandle?: () => void;
 };
 
@@ -17,7 +17,7 @@ export const MangaItem = ({
   title = "Hiện tại mình chưa update",
   team,
   description = "Hiện tại mình chưa update, xin lỗi nhaaaaa!!!!!",
-  chapter = "C. 10",
+  chapter,
 }: MangaItemType) => {
   return (
     <div
@@ -33,7 +33,7 @@ export const MangaItem = ({
           sizes="(max-width: 768px) 100vw, 200px"
         />
         <div className="absolute inset-0 z-10 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-start px-3 text-white text-sm">
-          <p className="font-semibold">{chapter}</p>
+          <p className="font-semibold">Ch. {chapter}</p>
           <p className="text-xs mt-1">{team}</p>
           <p className="text-xs mt-1 italic line-clamp-3">{description}</p>
           <button
@@ -44,7 +44,7 @@ export const MangaItem = ({
           </button>
         </div>
       </div>
-      <h3 className="mt-2 px-1 text-sm text-left text-black dark:text-white font-semibold line-clamp-2">
+      <h3 className="mt-2 px-1 text-sm text-left text-white dark:text-white font-semibold line-clamp-2">
         {name}
       </h3>
     </div>

@@ -4,7 +4,7 @@ import { ComicItem } from "../types/manga";
 import Image from "next/image";
 
 export const ListManga = ({ mangas }: { mangas: ComicItem[] }) => {
-      const router = useRouter();
+  const router = useRouter();
   return (
     <>
       {mangas.map((item, index) => (
@@ -14,10 +14,11 @@ export const ListManga = ({ mangas }: { mangas: ComicItem[] }) => {
           image={item?.thumb_url}
           name={item?.name}
           title={item.content}
+          chapter={item.chaptersLatest[0].chapter_name}
           clickHandle={() => router.push(`/manga/${item.slug}`)}
         />
       ))}
-       {/* {mangas.map((item, index) => (
+      {/* {mangas.map((item, index) => (
         <div key={index} className="group cursor-pointer">
           <div className="relative aspect-[2/3] rounded-lg overflow-hidden mb-2">
             <Image

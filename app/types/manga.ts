@@ -12,16 +12,20 @@ export type ComicItem = {
     slug: string;
   }[];
   updatedAt: string;
-  chaptersLatest: any | null;
+  chaptersLatest: {
+    chapter_name: number;
+    chapter_api_data: string;
+    filename: string,
+  }[]
   chapters: {
     server_data: {
       chapter_name: number;
       chapter_api_data: string;
-      filename : string,
+      filename: string,
     }[];
   }[];
-  content : string,
-  author : string[]
+  content: string,
+  author: string[]
 };
 
 export type SeoOnPage = {
