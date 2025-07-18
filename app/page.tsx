@@ -1,103 +1,172 @@
 import Image from "next/image";
+import { LatestUpdates } from "./components/home/LatestUpdates/LatestUpdates";
+import { Star, BookOpen, Calendar } from "lucide-react";
+import ButtonBanner from "./components/button/ButtonBanner";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <>
+      {/* Hero Section */}
+      <div className="relative min-h-[60vh] lg:min-h-[70vh]">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000" 
+          style={{
+            backgroundImage: `url("https://img.otruyenapi.com/uploads/comics/hoi-quy-nhung-the-gioi-van-binh-yen-thumb.jpg")`,
+          }}
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 backdrop-blur-[2px]" />
+
+        {/* Content */}
+        <div className="relative z-10 flex items-center min-h-[60vh] lg:min-h-[70vh] py-8 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
+              {/* Manga Cover */}
+              <div className="flex-shrink-0 w-full max-w-xs sm:max-w-sm lg:max-w-none lg:w-80">
+                <div className="relative group">
+                  <Image
+                    src="https://img.otruyenapi.com/uploads/comics/hoi-quy-nhung-the-gioi-van-binh-yen-thumb.jpg"
+                    alt="JUJUSUKAISEN Manga Cover"
+                    width={160}
+                    height={240}
+                    className="w-[80%] mx-auto aspect-[2/3] object-cover rounded-xl shadow-2xl transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </div>
+
+              {/* Manga Info */}
+              <div className="flex-1 text-center lg:text-left max-w-2xl">
+                <div className="space-y-6">
+                  {/* Title */}
+                  <div>
+                    <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white leading-tight mb-2">
+                      JUJUTSU KAISEN
+                    </h1>
+                    <div className="flex items-center justify-center lg:justify-start gap-2 text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 fill-current" />
+                      ))}
+                      <span className="text-white/80 ml-2">(4.8)</span>
+                    </div>
+                  </div>
+
+                  {/* Authors */}
+                  <div className="space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-300">
+                      <span className="text-white/60 text-sm uppercase tracking-wider">
+                        Artist:
+                      </span>
+                      <span className="text-lg font-medium">りーちゃん</span>
+                    </div>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-300">
+                      <span className="text-white/60 text-sm uppercase tracking-wider">
+                        Author:
+                      </span>
+                      <span className="text-lg font-medium">
+                        Yamamoto Koudai
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Genre Tags */}
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-2">
+                    {["Action", "Supernatural", "School", "Shounen"].map(
+                      (genre) => (
+                        <span
+                          key={genre}
+                          className="px-3 py-1 bg-white/10 backdrop-blur-sm text-white text-sm rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
+                        >
+                          {genre}
+                        </span>
+                      )
+                    )}
+                  </div>
+
+                  {/* Stats */}
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-6 text-sm text-white/80">
+                    <div className="flex items-center gap-2">
+                      <BookOpen className="w-4 h-4" />
+                      <span>250 Chapters</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      <span>Ongoing</span>
+                    </div>
+                  </div>
+
+                  {/* Action buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                    <ButtonBanner
+                      bg="bg-blue-600"
+                      hover="hover:bg-blue-700"
+                      icon={<BookOpen />}
+                      text="Read Now"
+                    />
+                    <button className="border-white/30 text-white hover:bg-white/10 px-8 py-3 text-sm backdrop-blur-sm rounded-lg transition-all duration-200 hover:scale-105 bg-transparent">
+                      Add to Library
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* Bottom Gradient */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-900 to-transparent z-10" />
+      </div>
+
+      {/* Latest Updates Section */}
+      <section className="bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl lg:text-3xl font-bold text-white">
+              Latest Updates
+            </h2>
+            <button className="text-gray-400 hover:text-white">View All</button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <LatestUpdates />
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Section */}
+      <section className="bg-transparent py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl lg:text-3xl font-bold text-white">
+              Popular This Week
+            </h2>
+            <button className="text-gray-400 hover:text-white">View All</button>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+            {/* Placeholder for popular manga */}
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="group cursor-pointer">
+                <div className="relative aspect-[2/3] rounded-lg overflow-hidden mb-2">
+                  <Image
+                    src="https://mangadex.org/covers/0f19ed5a-e496-4416-8d4d-86d338655156/d6ea2d68-709b-4c17-9e67-2f93fa759071.jpg.512.jpg"
+                    alt={`Popular manga ${i + 1}`}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+                </div>
+                <h3 className="text-white text-sm font-medium truncate group-hover:text-blue-400 transition-colors">
+                  Manga Title {i + 1}
+                </h3>
+                <p className="text-gray-400 text-xs">Chapter {20 + i}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
