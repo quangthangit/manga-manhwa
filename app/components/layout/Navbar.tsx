@@ -3,20 +3,18 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [atTop, setAtTop] = useState(true);
   const lastScrollY = useRef(0);
-  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      setAtTop(currentScrollY < 10); 
+      setAtTop(currentScrollY < 10);
 
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setShowNavbar(false);
@@ -29,7 +27,7 @@ export const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
+  }, []);
 
   return (
     <div

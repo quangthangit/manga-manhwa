@@ -1,17 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ArrowLeft, ArrowRight, Bookmark, Eye, HomeIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ButtonBanner from "@/app/components/button/ButtonBanner";
 
 const ChapterFloatingButtons = () => {
-  const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const router = useRouter();
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setShow(scrollTop > 100);
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -20,8 +29,8 @@ const ChapterFloatingButtons = () => {
 
   return (
     <div
-      className={`bg-gray-700 w-full fixed bottom-0 left-1/2 justify-center p-1 -translate-x-1/2 flex gap-2 z-50 transition-opacity duration-300 ${
-        show ? "opacity-100" : "opacity-0 pointer-events-none"
+      className={`bg-gray-700 w-full fixed bottom-0 left-1/2 justify-center p-1 -translate-x-1/2 flex gap-2 z-50 transition-transform duration-300 ${
+        visible ? "translate-y-0" : "translate-y-full"
       }`}
     >
       <ButtonBanner
