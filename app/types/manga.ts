@@ -62,3 +62,14 @@ export type ComicApiResponse = {
     APP_DOMAIN_CDN_IMAGE: string;
   };
 };
+
+export type ChapterResponse = {
+  domain_cdn: string;
+  item: {
+    chapter_path: string;
+    chapter_image: {
+      image_page: number;
+      image_file: string;
+    }[];
+  };
+};

@@ -1,13 +1,4 @@
-type ChapterResponse = {
-  domain_cdn: string;
-  item: {
-    chapter_path: string;
-    chapter_image: {
-      image_page: number;
-      image_file: string;
-    }[];
-  };
-};
+import { ChapterResponse } from "@/app/types/manga";
 
 export const ChapterViewer = ({ data }: { data: ChapterResponse }) => {
   const { domain_cdn, item } = data;

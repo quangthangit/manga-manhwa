@@ -22,7 +22,7 @@ export const Navbar = () => {
         setShowNavbar(false);
       }
 
-      if (scrollDiff > 50) {
+      if (scrollDiff > 30) {
         setShowNavbar(true);
       }
 

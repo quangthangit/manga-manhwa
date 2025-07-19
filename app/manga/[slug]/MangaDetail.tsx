@@ -78,7 +78,7 @@ export const MangaDetail = ({ comicItem }: {comicItem : ComicItem}) => {
                         <Link
                           href={`/manga/${
                             comicItem.slug
-                          }/${chapter.chapter_api_data.substring(
+                          }/${chapter.chapter_name}/${chapter.chapter_api_data.substring(
                             chapter.chapter_api_data.lastIndexOf("/") + 1
                           )}`}
                           key={index}
