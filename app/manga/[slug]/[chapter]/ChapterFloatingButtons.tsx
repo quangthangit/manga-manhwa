@@ -13,10 +13,13 @@ const ChapterFloatingButtons = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const diff = currentScrollY - lastScrollY.current;
 
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+      if (diff > 20 && currentScrollY > 50) {
         setVisible(false);
-      } else {
+      }
+
+      if (diff < -50) {
         setVisible(true);
       }
 

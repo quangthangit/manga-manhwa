@@ -16,9 +16,13 @@ export const Navbar = () => {
 
       setAtTop(currentScrollY < 10);
 
+      const scrollDiff = lastScrollY.current - currentScrollY;
+
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setShowNavbar(false);
-      } else {
+      }
+
+      if (scrollDiff > 50) {
         setShowNavbar(true);
       }
 
