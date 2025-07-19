@@ -1,21 +1,42 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [atTop, setAtTop] = useState(true);
+  const lastScrollY = useRef(0);
+  const pathname = usePathname();
+
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+
+      setAtTop(currentScrollY < 10); 
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
+
   return (
-    <div className={`fixed w-full bg-center bg-no-repeat z-15 ${scrolled ? "bg-gray-700" : "bg-transparent"} mb-3`}>
+    <div
+      className={`fixed w-full z-50 transition-transform duration-300 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      } ${atTop ? "bg-transparent" : "bg-gray-700"}`}
+    >
       <div className="relative z-10 py-4 px-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/">
