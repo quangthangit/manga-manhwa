@@ -37,10 +37,10 @@ export const Navbar = () => {
         showNavbar ? "translate-y-0" : "-translate-y-full"
       } ${atTop ? "bg-transparent" : "bg-gray-700"}`}
     >
-      <div className="relative z-10 py-4 px-4">
+      <div className="relative z-10 py-3 px-3">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/">
-            <h1 className="text-2xl font-extrabold text-gray-300 hover:text-white transition">
+            <h1 className="text-xl font-extrabold text-gray-300 hover:text-white transition">
               TRUYENHAY
             </h1>
           </Link>
@@ -50,9 +50,6 @@ export const Navbar = () => {
             </Link>
             <Link href="/manga" className="hover:text-white transition">
               Manga
-            </Link>
-            <Link href="/about" className="hover:text-white transition">
-              About
             </Link>
             <Link href="/contact" className="hover:text-white transition">
               Contact
@@ -73,9 +70,6 @@ export const Navbar = () => {
             </Link>
             <Link href="/manga" className="hover:text-white transition">
               All Manga
-            </Link>
-            <Link href="/about" className="hover:text-white transition">
-              About
             </Link>
             <Link href="/contact" className="hover:text-white transition">
               Contact
