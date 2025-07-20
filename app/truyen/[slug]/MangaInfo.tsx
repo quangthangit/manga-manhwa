@@ -30,9 +30,7 @@ export const MangaInfo = ({
           </span>
         ))}
       </div>
-      <div className="flex flex-wrap gap-2 mt-3">
-        {content}
-      </div>
+      <div className="flex flex-wrap gap-2 mt-3">{content}</div>
       <p className="mt-4 text-sm leading-relaxed text-blue-50 max-w-2xl">
         {updatedAt ? <>Cập nhập {formatTimeAgo(updatedAt)}</> : null}
       </p>

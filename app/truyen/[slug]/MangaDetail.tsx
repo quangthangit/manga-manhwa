@@ -7,10 +7,13 @@ import {
   Eye,
   MessageCircle,
   PaintbrushVerticalIcon,
+  BookDashed,
+  LucideSwatchBook,
+  Clock5Icon,
 } from "lucide-react";
 import { ComicItem } from "@/app/types/manga";
 
-export const MangaDetail = ({ comicItem }: {comicItem : ComicItem}) => {
+export const MangaDetail = ({ comicItem }: { comicItem: ComicItem }) => {
   const [activeTab, setActiveTab] = useState<"chapters" | "comments" | "art">(
     "chapters"
   );
@@ -76,19 +79,19 @@ export const MangaDetail = ({ comicItem }: {comicItem : ComicItem}) => {
                       )
                       .map((chapter, index) => (
                         <Link
-                          href={`/truyen/${
-                            comicItem.slug
-                          }/${chapter.chapter_name}/${chapter.chapter_api_data.substring(
+                          href={`/truyen/${comicItem.slug}/${
+                            chapter.chapter_name
+                          }/${chapter.chapter_api_data.substring(
                             chapter.chapter_api_data.lastIndexOf("/") + 1
                           )}`}
                           key={index}
                         >
-                          <div className="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 transition-colors">
+                          <div className="bg-gray-800 active:bg-gray-700 hover:bg-gray-700 rounded-lg p-4 transition-colors">
                             <div className="flex items-center justify-between">
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-1">
                                   <span className="text-red-500 text-xs">
-                                    🔴
+                                    <LucideSwatchBook/>
                                   </span>
                                   <span className="font-semibold">
                                     Ch. {chapter.chapter_name}
@@ -101,7 +104,7 @@ export const MangaDetail = ({ comicItem }: {comicItem : ComicItem}) => {
                               </div>
                               <div className="flex items-center gap-4 text-sm text-gray-400">
                                 <div className="flex items-center gap-1">
-                                  <Clock size={14} />
+                                  <Clock5Icon size={14} />
                                   <span>12.12.2022</span>
                                 </div>
                                 <div className="flex items-center gap-1">

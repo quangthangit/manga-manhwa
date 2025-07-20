@@ -2,12 +2,11 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { BookOpen, Calendar, Star } from "lucide-react";
 import Image from "next/image";
 import ButtonBanner from "../../button/ButtonBanner";
+import Autoplay from "embla-carousel-autoplay";
 
 const data = [
   {
@@ -83,7 +82,17 @@ const data = [
 export const Banner = () => {
   return (
     <>
-      <Carousel>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        plugins={[
+          Autoplay({
+            delay: 3000,
+          }),
+        ]}
+      >
         <CarouselContent className="">
           {data.map((_, index) => (
             <CarouselItem key={index} className="w-full">

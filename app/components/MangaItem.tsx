@@ -8,7 +8,7 @@ type MangaItemType = {
 };
 export const MangaItem = ({ name, thumb_url, updatedAt }: MangaItemType) => {
   return (
-    <div className="bg-gray-600 hover:bg-gray-500 rounded-lg shadow p-4 flex gap-4">
+    <div className="bg-gray-600 hover:bg-gray-500 rounded-lg shadow p-4 flex gap-4 ">
       <Image
         height={100}
         width={100}

@@ -1,6 +1,8 @@
-import { Header } from "./components/layout/Header";
+import { X } from "lucide-react";
+
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import { Navbar } from "./components/layout/Navbar";
 
 export default function RootLayout({
   children,
@@ -23,7 +25,7 @@ export default function RootLayout({
           showSpinner={false}
           template={`<div class="bar bg-web-title" role="bar"><div class="peg"></div></div>`}
         />
-        <Header />
+        <Navbar />
         <main className="flex-grow w-full">{children}</main>
         <footer className="bg-gray-900 text-white p-4 text-center">
           <p>© 2025 My Website</p>

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { LatestUpdates } from "./components/home/LatestUpdates/LatestUpdates";
 import { useState } from "react";
 import { Banner } from "./components/home/Banner/Banner";
