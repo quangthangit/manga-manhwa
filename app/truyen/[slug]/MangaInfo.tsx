@@ -17,7 +17,7 @@ export const MangaInfo = ({
   name,
   updatedAt,
 }: MangaInfoProps) => (
-  <div className="flex flex-1 z-10 flex-col justify-around">
+  <div className="flex flex-1 z-10 flex-col justify-between">
     <div>
       <h2 className="text-2xl md:text-3xl font-bold leading-snug">{name}</h2>
       <div className="flex flex-wrap gap-2 mt-3">

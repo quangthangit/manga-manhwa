@@ -1,89 +1,117 @@
-"use client"
-import { useEffect, useState, useRef } from "react"
-import { ArrowLeft, ArrowRight, Bookmark, Eye, HomeIcon, Search, X } from "lucide-react"
-import { useRouter } from "next/navigation"
-import ButtonBanner from "@/app/components/button/ButtonBanner"
-import { useMangaDetails } from "@/app/hooks/useMangaDetails"
-import type { ComicItem } from "@/app/types/manga"
+"use client";
+import { useEffect, useState, useRef } from "react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpToLineIcon,
+  Bookmark,
+  Eye,
+  HomeIcon,
+  Search,
+  X,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import ButtonBanner from "@/app/components/button/ButtonBanner";
+import { useMangaDetails } from "@/app/hooks/useMangaDetails";
+import type { ComicItem } from "@/app/types/manga";
 
 type SlugType = {
-  slug: string
-  chapter: string
-  id: string
-}
+  slug: string;
+  chapter: string;
+  id: string;
+};
 
 export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
-  const [visible, setVisible] = useState(true)
-  const [showList, setShowList] = useState(false)
-  const [searchTerm, setSearchTerm] = useState("")
-  const lastScrollY = useRef(0)
-  const [chapters, setChapters] = useState<ComicItem | null>(null)
-  const router = useRouter()
-  const { loading, manga } = useMangaDetails(slug)
+  const [visible, setVisible] = useState(true);
+  const [showList, setShowList] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const lastScrollY = useRef(0);
+  const [chapters, setChapters] = useState<ComicItem | null>(null);
+  const router = useRouter();
+  const { loading, manga } = useMangaDetails(slug);
 
   useEffect(() => {
     if (!loading && manga) {
-      setChapters(manga)
+      setChapters(manga);
     }
-  }, [loading, manga])
+  }, [loading, manga]);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      const diff = currentScrollY - lastScrollY.current
+      const currentScrollY = window.scrollY;
+      const diff = currentScrollY - lastScrollY.current;
       if (diff > 20 && currentScrollY > 50) {
-        setVisible(false)
-        setShowList(false) 
+        setVisible(false);
+        setShowList(false);
       }
       if (diff < -50) {
-        setVisible(true)
+        setVisible(true);
       }
-      lastScrollY.current = currentScrollY
-    }
+      lastScrollY.current = currentScrollY;
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (showList && !(event.target as Element).closest(".chapter-dropdown")) {
-        setShowList(false)
+        setShowList(false);
       }
-    }
+    };
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [showList])
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showList]);
 
   const handlePrev = () => {
-    const prevChapter: number = Number(chapter) - 1
-    const data = manga?.chapters[0].server_data.find((data) => data.chapter_name == prevChapter)
+    const prevChapter: number = Number(chapter) - 1;
+    const data = manga?.chapters[0].server_data.find(
+      (data) => data.chapter_name == prevChapter
+    );
     if (data) {
-      router.push(`/manga/${slug}/${prevChapter}/${data.chapter_api_data.split("/").pop()}`)
+      router.push(
+        `/truyen/${slug}/${prevChapter}/${data.chapter_api_data
+          .split("/")
+          .pop()}`
+      );
     }
-  }
+  };
 
   const handleNext = () => {
-    const nextChapter: number = Number(chapter) + 1
-    const data = manga?.chapters[0].server_data.find((data) => data.chapter_name == nextChapter)
+    const nextChapter: number = Number(chapter) + 1;
+    const data = manga?.chapters[0].server_data.find(
+      (data) => data.chapter_name == nextChapter
+    );
     if (data) {
-      router.push(`/manga/${slug}/${nextChapter}/${data.chapter_api_data.split("/").pop()}`)
+      router.push(
+        `/truyen/${slug}/${nextChapter}/${data.chapter_api_data
+          .split("/")
+          .pop()}`
+      );
     }
-  }
+  };
+
+  const handleScoll = () => {
+    window.scrollTo(0, 0);
+  };
 
   const handleChapterSelect = (chapNum: number, chapId: string) => {
-    setShowList(false)
-    setSearchTerm("")
-    router.push(`/manga/${slug}/${chapNum}/${chapId}`)
-  }
+    setShowList(false);
+    setSearchTerm("");
+    router.push(`/truyen/${slug}/${chapNum}/${chapId}`);
+  };
 
   const filteredChapters =
-    manga?.chapters[0].server_data.filter((chap) => chap.chapter_name.toString().includes(searchTerm)) || []
+    manga?.chapters[0].server_data.filter((chap) =>
+      chap.chapter_name.toString().includes(searchTerm)
+    ) || [];
 
   const currentChapterIndex =
-    manga?.chapters[0].server_data.findIndex((chap) => chap.chapter_name.toString() === chapter) ?? -1
+    manga?.chapters[0].server_data.findIndex(
+      (chap) => chap.chapter_name.toString() === chapter
+    ) ?? -1;
 
   return (
     <>
@@ -94,7 +122,7 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
         />
       )}
       <div
-        className={`bg-gray-800/95 backdrop-blur-md w-full mx-auto fixed bottom-0 left-1/2 justify-center p-3 -translate-x-1/2 flex gap-2 z-50 transition-all duration-300 rounded-t-2xl border-t border-gray-600 ${
+        className={`bg-gray-800/95 backdrop-blur-md w-full mx-auto fixed bottom-0 left-1/2 justify-center p-3 -translate-x-1/2 flex gap-2 z-50 transition-all duration-300 border-t border-gray-600 ${
           visible ? "translate-y-0" : "translate-y-full"
         }`}
       >
@@ -125,7 +153,17 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
           icon={<ArrowRight size={16} />}
           onClick={handleNext}
         />
-        <ButtonBanner bg="bg-orange-600/90" hover="hover:bg-orange-500" icon={<Bookmark size={16} />} />
+        <ButtonBanner
+          bg="bg-gray-600/80"
+          hover="hover:bg-gray-500"
+          icon={<ArrowUpToLineIcon size={16} />}
+          onClick={handleScoll}
+        />
+        <ButtonBanner
+          bg="bg-orange-600/90"
+          hover="hover:bg-orange-500"
+          icon={<Bookmark size={16} />}
+        />
       </div>
       {showList && (
         <div className="chapter-dropdown fixed bottom-20 left-1/2 -translate-x-1/2 w-[95vw] max-w-md z-50 animate-in slide-in-from-bottom-4 duration-200">
@@ -141,7 +179,10 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
                 </button>
               </div>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70" size={18} />
+                <Search
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70"
+                  size={18}
+                />
                 <input
                   type="text"
                   placeholder="Tìm chapter..."
@@ -155,7 +196,8 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
               {filteredChapters.length > 0 ? (
                 <div className="p-2">
                   {filteredChapters.map((chap, index) => {
-                    const isCurrentChapter = chap.chapter_name.toString() === chapter
+                    const isCurrentChapter =
+                      chap.chapter_name.toString() === chapter;
                     return (
                       <div
                         key={chap.chapter_api_data}
@@ -165,7 +207,10 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
                             : "hover:bg-gray-100 dark:hover:bg-gray-700 border-2 border-transparent"
                         }`}
                         onClick={() =>
-                          handleChapterSelect(Number(chap.chapter_name), chap.chapter_api_data.split("/").pop()!)
+                          handleChapterSelect(
+                            Number(chap.chapter_name),
+                            chap.chapter_api_data.split("/").pop()!
+                          )
                         }
                       >
                         <div className="flex items-center justify-between">
@@ -189,13 +234,19 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
                               >
                                 Chapter {chap.chapter_name}
                               </p>
-                              {isCurrentChapter && <p className="text-sm text-blue-600 dark:text-blue-400">Đang đọc</p>}
+                              {isCurrentChapter && (
+                                <p className="text-sm text-blue-600 dark:text-blue-400">
+                                  Đang đọc
+                                </p>
+                              )}
                             </div>
                           </div>
-                          {isCurrentChapter && <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />}
+                          {isCurrentChapter && (
+                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                          )}
                         </div>
                       </div>
-                    )
+                    );
                   })}
                 </div>
               ) : (
@@ -208,10 +259,13 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
             {manga && (
               <div className="bg-gray-50 dark:bg-gray-700/50 p-4 border-t border-gray-200 dark:border-gray-600">
                 <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-                  <span>Tổng cộng: {manga.chapters[0].server_data.length} chapters</span>
+                  <span>
+                    Tổng cộng: {manga.chapters[0].server_data.length} chapters
+                  </span>
                   {currentChapterIndex >= 0 && (
                     <span>
-                      {currentChapterIndex + 1} / {manga.chapters[0].server_data.length}
+                      {currentChapterIndex + 1} /{" "}
+                      {manga.chapters[0].server_data.length}
                     </span>
                   )}
                 </div>
@@ -221,6 +275,5 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
         </div>
       )}
     </>
-  )
-}
-
+  );
+};

@@ -18,7 +18,7 @@ export const LatestUpdates = () => {
             ></div>
           ))
         : mangas.map((manga, index) => (
-            <Link href={`/manga/${manga.slug}`} key={index}>
+            <Link href={`/truyen/${manga.slug}`} key={index}>
               <div className="group cursor-pointer">
                 <div className="relative aspect-[2/3] rounded-lg overflow-hidden mb-2">
                   <Image

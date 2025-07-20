@@ -6,7 +6,6 @@ export const fetchMangaDetails = async (slug: string): Promise<ComicItem | null>
     const json = await res.json();
     return json.data?.item || null;
   } catch (error) {
-    console.error("Lỗi khi fetch chi tiết manga:", error);
     return null;
   }
 };

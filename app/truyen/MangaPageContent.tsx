@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMangas } from "../hooks/useMangas";
 import { ListManga } from "./ListManga";
 import { NavPaging } from "./NavPaging";
-import { LatestUpdates } from "../components/home/LatestUpdates/LatestUpdates";
 
 type MangaPageContentTypes = {
   pageParam?: string;

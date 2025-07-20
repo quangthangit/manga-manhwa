@@ -76,7 +76,7 @@ export const MangaDetail = ({ comicItem }: {comicItem : ComicItem}) => {
                       )
                       .map((chapter, index) => (
                         <Link
-                          href={`/manga/${
+                          href={`/truyen/${
                             comicItem.slug
                           }/${chapter.chapter_name}/${chapter.chapter_api_data.substring(
                             chapter.chapter_api_data.lastIndexOf("/") + 1

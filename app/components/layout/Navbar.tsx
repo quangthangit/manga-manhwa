@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu, SearchIcon, X } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
@@ -22,7 +22,7 @@ export const Navbar = () => {
         setShowNavbar(false);
       }
 
-      if (scrollDiff > 30) {
+      if (scrollDiff > 10) {
         setShowNavbar(true);
       }
 
@@ -47,12 +47,6 @@ export const Navbar = () => {
             </h1>
           </Link>
           <nav className="hidden md:flex space-x-6 text-sm font-semibold text-gray-300">
-            <Link href="/" className="hover:text-white transition">
-              Home
-            </Link>
-            <Link href="/manga" className="hover:text-white transition">
-              Manga
-            </Link>
             <Link href="/contact" className="hover:text-white transition">
               Contact
             </Link>
@@ -67,12 +61,6 @@ export const Navbar = () => {
         </div>
         {isOpen && (
           <div className="mt-4 md:hidden flex flex-col space-y-2 text-sm font-semibold text-gray-300 px-2">
-            <Link href="/" className="hover:text-white transition">
-              Home
-            </Link>
-            <Link href="/manga" className="hover:text-white transition">
-              All Manga
-            </Link>
             <Link href="/contact" className="hover:text-white transition">
               Contact
             </Link>
