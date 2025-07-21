@@ -1,24 +1,22 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMangas } from "../hooks/useMangas";
-import { ListManga } from "./ListManga";
 import { NavPaging } from "../components/NavPaging";
-
-type MangaPageContentTypes = {
-  pageParam?: string;
+import { ListManga } from "../truyen/ListManga";
+import { useMangasByKey } from "../hooks/useMangasByKey";
+type MangaSearchPageTypes = {
+  page?: string;
+  keyword?: string;
 };
-
-export function MangaPageContent({ pageParam }: MangaPageContentTypes) {
+export function MangaSearchPage({
+  keyword = "",
+  page = "1",
+}: MangaSearchPageTypes) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const currentPage = Number.parseInt(
-    pageParam || searchParams.get("page") || "1",
-    10
-  );
-
-  const { loading, mangas, totalPage } = useMangas(currentPage);
+  const { loading, mangas, totalPage } = useMangasByKey(keyword, page);
+  const currentPage = parseInt(page, 10);
 
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPage) {
@@ -40,13 +38,14 @@ export function MangaPageContent({ pageParam }: MangaPageContentTypes) {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-lg lg:text-xl font-bold text-white">
-            Vừa cập nhật
+            Truyện theo từ khóa '{keyword}'
           </h2>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-6">
           <ListManga mangas={mangas} />
         </div>
       </div>
+
       <NavPaging
         currentPage={currentPage}
         goToPageclick={goToPage}
