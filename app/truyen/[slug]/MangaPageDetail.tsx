@@ -17,7 +17,16 @@ export default async function MangaPageDetail({ params }: Props) {
   return (
     <>
       <div className="lg:col-span-2">
-        <div className="bg-gradient-to-r from-gray-200 to-gray-100 rounded-lg p-6 mb-6 relative overflow-hidden">
+        <div
+          className="bg-gradient-to-r from-gray-200 to-gray-100 rounded-lg p-6 mb-6 relative overflow-hidden"
+          // style={{
+          //   backgroundImage:
+          //     "url(https://s4.anilist.co/file/anilistcdn/media/manga/cover/large/bx103738-lx4SWO07qRs1.jpg)",
+          //   backgroundSize: "cover",
+          //   backgroundPosition: "center",
+          // }}
+        >
+           {/* <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-gray-800/20 z-0" /> */}
           <div className="absolute inset-0"></div>
           <div className="relative z-10">
             <div className="flex items-start space-x-4">
@@ -89,8 +98,10 @@ export default async function MangaPageDetail({ params }: Props) {
                 prev.chapter_api_data.lastIndexOf("/") + 1
               )}`}
               key={index}
-              className="flex items-center justify-between p-3 bg-[#f9fafb] rounded-sm hover:bg-gray-300 transition-colors cursor-pointer"
+              className="flex items-center justify-between p-3 bg-[#f9fafb] rounded-sm hover:bg-gray-300 transition-colors cursor-pointer relative pl-4"
             >
+              <div className="absolute left-0 top-0 h-full w-1 bg-[rgb(209,213,219)] rounded-l" />
+
               <div>
                 <h4 className="font-medium text-[#1f2937]">
                   Chương {prev.chapter_name}
