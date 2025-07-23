@@ -5,7 +5,7 @@ import { ComicItem } from "../types/manga";
 import { fetchLatestMangas } from "../api/fetchLatestMangas";
 
 export const useLatestMangas = () => {
-  const [mangas, setMangas] = useState<ComicItem[]>([]);
+  const [mangas, setMangas] = useState<ComicItem[] | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

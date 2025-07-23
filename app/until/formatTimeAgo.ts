@@ -1,4 +1,4 @@
-export default function formatTimeAgo(dateString: string): string {
+export default function formatTimeAgo(dateString: string) {
   const updatedTime = new Date(dateString);
   const now = new Date();
   const diffMs = now.getTime() - updatedTime.getTime();

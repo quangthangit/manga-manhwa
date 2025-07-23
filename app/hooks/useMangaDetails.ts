@@ -5,7 +5,7 @@ import { fetchMangaDetails } from "@/app/api/fetchMangaDetails";
 import { ComicItem } from "../types/manga";
 
 export const useMangaDetails = (slug: string) => {
-  const [manga, setManga] = useState<ComicItem | null>(null);
+  const [manga, setManga] = useState<ComicItem | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

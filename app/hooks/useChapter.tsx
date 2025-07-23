@@ -5,7 +5,7 @@ import { fetchChapter } from "@/app/api/fetchChapter";
 import { ChapterResponse } from "../types/manga";
 
 export const useChapter = (chapterId: string) => {
-  const [data, setData] = useState<ChapterResponse | undefined>();
+  const [data, setData] = useState<ChapterResponse | null>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

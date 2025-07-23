@@ -133,7 +133,6 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
           icon={<HomeIcon size={16} />}
         />
         <ButtonBanner
-          text="Trước"
           bg="bg-gray-600/80"
           hover="hover:bg-gray-500"
           icon={<ArrowLeft size={16} />}
@@ -147,7 +146,6 @@ export const ChapterFloatingButtons = ({ slug, chapter, id }: SlugType) => {
           onClick={() => setShowList((prev) => !prev)}
         />
         <ButtonBanner
-          text="Sau"
           bg="bg-gray-600/80"
           hover="hover:bg-gray-500"
           icon={<ArrowRight size={16} />}

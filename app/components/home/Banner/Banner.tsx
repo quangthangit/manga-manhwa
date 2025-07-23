@@ -1,27 +1,12 @@
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
-import { BookOpen, Calendar, Star } from "lucide-react"
-import Image from "next/image"
-import ButtonBanner from "../../button/ButtonBanner"
-import Autoplay from "embla-carousel-autoplay"
-
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { BookOpen, Calendar, Star } from "lucide-react";
+import Image from "next/image";
+import ButtonBanner from "../../button/ButtonBanner";
 const data = [
-  {
-    image:
-      "https://storage-ct.lrclib.net/file/cuutruyen/uploads/manga/2290/cover/processed-5bb0f68bf348e718bb10fc33e28ae714.jpg",
-    name: "Về chuyện tôi vô tình trở thành quản lí của một idol kì lạ",
-    author: "Kai Bashira",
-    category: [
-      "doi-thuong",
-      "gyaru",
-      "comedy",
-      "hai-huoc",
-      "web-comic",
-      "slice-of-life",
-      "yuri",
-      "dang-tien-hanh",
-      "manga",
-    ],
-  },
   {
     image:
       "https://storage-ct.lrclib.net/file/cuutruyen/uploads/manga/106/cover/processed-31e8bd1cd1ffbc29f53f13584d8e57de.jpg",
@@ -73,7 +58,7 @@ const data = [
       "manga",
     ],
   },
-]
+];
 
 export const Banner = () => {
   return (
@@ -83,23 +68,13 @@ export const Banner = () => {
           align: "start",
           loop: true,
         }}
-        plugins={[
-          Autoplay({
-            delay: 3000,
-          }),
-        ]}
       >
         <CarouselContent className="">
           {data.map((_, index) => (
             <CarouselItem key={index} className="w-full">
               <div className="w-full">
                 <div className="relative">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-2000"
-                    style={{
-                      backgroundImage: `url(${_.image})`,
-                    }}
-                  />
+                  <div className="bg-[#52c5ff] absolute inset-0 bg-cover bg-center transition-all duration-2000" />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 backdrop-blur-[2px]" />
                   <div className="relative z-10 flex items-center py-18">
                     <div className="max-w-7xl mx-auto w-full">
@@ -114,7 +89,6 @@ export const Banner = () => {
                               className="w-[70%] mx-auto aspect-[2/3] object-cover rounded-xl shadow-2xl transition-transform duration-300 group-hover:scale-100"
                               priority
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </div>
                         </div>
                         <div className="flex-1 text-center lg:text-left max-w-2xl">
@@ -125,19 +99,32 @@ export const Banner = () => {
                               </h1>
                               <div className="flex items-center justify-center lg:justify-start gap-2 text-yellow-400">
                                 {[...Array(5)].map((_, i) => (
-                                  <Star key={i} className="w-4 h-4 fill-current" />
+                                  <Star
+                                    key={i}
+                                    className="w-4 h-4 fill-current"
+                                  />
                                 ))}
-                                <span className="text-white/80 ml-2 text-sm">(4.8)</span>
+                                <span className="text-white/80 ml-2 text-sm">
+                                  (4.8)
+                                </span>
                               </div>
                             </div>
                             <div className="space-y-1">
                               <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-300">
-                                <span className="text-white/60 text-xs uppercase tracking-wider">Artist:</span>
-                                <span className="text-base font-medium">りーちゃん</span>
+                                <span className="text-white/60 text-xs uppercase tracking-wider">
+                                  Artist:
+                                </span>
+                                <span className="text-base font-medium">
+                                  りーちゃん
+                                </span>
                               </div>
                               <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-300">
-                                <span className="text-white/60 text-xs uppercase tracking-wider">Author:</span>
-                                <span className="text-base font-medium">{_.author}</span>
+                                <span className="text-white/60 text-xs uppercase tracking-wider">
+                                  Author:
+                                </span>
+                                <span className="text-base font-medium">
+                                  {_.author}
+                                </span>
                               </div>
                             </div>
                             <div className="flex flex-wrap justify-center lg:justify-start gap-1">
@@ -184,5 +171,5 @@ export const Banner = () => {
         </CarouselContent>
       </Carousel>
     </>
-  )
-}
+  );
+};

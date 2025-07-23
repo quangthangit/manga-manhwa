@@ -1,15 +1,15 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMangas } from "../hooks/useMangas";
 import { ListManga } from "./ListManga";
 import { NavPaging } from "../components/NavPaging";
+import { useMangas } from "../hooks/useMangas";
 
 type MangaPageContentTypes = {
   pageParam?: string;
 };
 
-export function MangaPageContent({ pageParam }: MangaPageContentTypes) {
+export  function MangaPageContent({ pageParam }: MangaPageContentTypes) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -18,7 +18,7 @@ export function MangaPageContent({ pageParam }: MangaPageContentTypes) {
     10
   );
 
-  const { loading, mangas, totalPage } = useMangas(currentPage);
+  const { mangas, totalPage } = useMangas(currentPage);
 
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPage) {
@@ -28,30 +28,16 @@ export function MangaPageContent({ pageParam }: MangaPageContentTypes) {
     }
   };
 
-  if (loading || !mangas)
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500 border-solid"></div>
-      </div>
-    );
-
   return (
-    <div className="min-h-screen bg-gray-900 px-4 py-10 mt-[70px]">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-lg lg:text-xl font-bold text-white">
-            Vừa cập nhật
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-6">
-          <ListManga mangas={mangas} />
-        </div>
+    <>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-4 lg:gap-6">
+        <ListManga mangas={mangas} />
       </div>
       <NavPaging
         currentPage={currentPage}
-        goToPageclick={goToPage}
         totalPage={totalPage}
+        goToPageclick={goToPage}
       />
-    </div>
+    </>
   );
 }

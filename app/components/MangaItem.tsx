@@ -1,33 +1,30 @@
 import formatTimeAgo from "@/app/until/formatTimeAgo";
 import Image from "next/image";
+import { ComicItem } from "../types/manga";
 
-type MangaItemType = {
-  thumb_url: string;
-  name: string;
-  updatedAt: string;
-};
-export const MangaItem = ({ name, thumb_url, updatedAt }: MangaItemType) => {
+export const MangaItem = ({ commicItem }: { commicItem: ComicItem }) => {
   return (
-    <div className="bg-gray-600 hover:bg-gray-500 rounded-lg shadow p-4 flex gap-4 ">
-      <Image
-        height={100}
-        width={100}
-        src={`https://img.otruyenapi.com/uploads/comics/${thumb_url}`}
-        alt={thumb_url}
-        className="w-20 h-28 object-cover rounded-md"
-      />
-      <div className="flex flex-col justify-between">
-        <div>
-          <h3 className="font-semibold text-white line-clamp-2">
-            {name}
-          </h3>
-          {/* <p className="text-xs text-gray-400">
-            Thể loại : {comicItem.category[0].name || "unknow"}
-          </p> */}
-          {/* <p className="text-xs text-gray-400">{comicItem.status || "unknow"}</p> */}
-        </div>
-        <p className="text-xs text-gray-400">
-          {formatTimeAgo(updatedAt)}
+    <div className="group cursor-pointe text-[#00000099]">
+      <div className="relative aspect-[2/3] rounded-sm overflow-hidden mb-2">
+        <Image
+          src={`https://img.otruyenapi.com//uploads/comics/${commicItem.thumb_url}`}
+          alt={commicItem.name}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+      </div>
+      <h3 className="text-[#1f2937] text-sm font-medium truncate group-hover:text-blue-400 transition-colors">
+        {commicItem.name}
+      </h3>
+      <div className="text-[#374151] flex justify-between">
+        <p className="text-xs">
+          {commicItem.chaptersLatest?.[0]?.chapter_name
+            ? `Ch. ${commicItem.chaptersLatest[0].chapter_name}`
+            : "Updated.."}
+        </p>
+        <p className="text-xs">
+          {formatTimeAgo(commicItem.updatedAt)}
         </p>
       </div>
     </div>

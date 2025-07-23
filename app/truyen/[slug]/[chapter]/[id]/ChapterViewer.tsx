@@ -1,23 +1,12 @@
-import { ChapterResponse } from "@/app/types/manga";
-
-export const ChapterViewer = ({ data }: { data: ChapterResponse }) => {
-  const { domain_cdn, item } = data;
-  const { chapter_path, chapter_image } = item;
-
-  if (!chapter_image || chapter_image.length === 0) {
-    return (
-      <div className="text-center py-10 text-gray-400">
-        Không có ảnh cho chapter này.
-      </div>
-    );
-  }
-
+import { fetchChapter } from "@/app/api/fetchChapter";
+export const ChapterViewer = async({id} : {id : string}) => {
+  const data = await fetchChapter(id)
   return (
     <div className="w-full mx-auto mt-[80px]">
-      {chapter_image.map((img) => (
+      {data?.item.chapter_image.map((img) => (
         <img
           key={img.image_page}
-          src={`${domain_cdn}/${chapter_path}/${img.image_file}`}
+          src={`${data.domain_cdn}/${data.item.chapter_path}/${img.image_file}`}
           alt={`Trang ${img.image_page}`}
           className="block mx-auto"
         />
