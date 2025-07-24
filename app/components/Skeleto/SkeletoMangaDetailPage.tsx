@@ -33,7 +33,6 @@ const SkeletoMangaDetailPage = () => {
             </div>
             <div className="bg-gray-200 mb-6 rounded-sm animate-pulse">
               <div className="p-4 flex items-start space-x-3">
-                <div className="w-8 h-8 bg-gray-300 rounded-full" />
                 <div className="flex-1">
                   <div className="h-5 w-32 bg-gray-300 rounded mb-2" />
                   <div className="h-4 w-full bg-gray-300 rounded" />

@@ -1,175 +1,214 @@
+"use client";
+
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { BookOpen, Calendar, Star } from "lucide-react";
-import Image from "next/image";
-import ButtonBanner from "../../button/ButtonBanner";
+import { Button } from "@/components/ui/button";
+import { useCallback, useEffect, useState } from "react";
+import type { EmblaCarouselType } from "embla-carousel";
+
 const data = [
   {
-    image:
-      "https://storage-ct.lrclib.net/file/cuutruyen/uploads/manga/106/cover/processed-31e8bd1cd1ffbc29f53f13584d8e57de.jpg",
-    name: "Suzuki Yuto",
-    author: "Kai Bashira",
-    category: [
-      "doi-thuong",
-      "gyaru",
-      "comedy",
-      "hai-huoc",
-      "web-comic",
-      "slice-of-life",
-      "yuri",
-      "dang-tien-hanh",
-      "manga",
-    ],
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178869-ZFn0hKphaLtk.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178869-ZFn0hKphaLtk.jpg",
+    title: "Sousou no Frieren",
+    description:
+      "Nữ pháp sư Elf - Frieren bất tử và hành trình khám phá bản thân cảm thấy thỏa mãn với đời.",
+    color: "from-blue-900 to-blue-400",
   },
   {
-    image:
-      "https://storage-ct.lrclib.net/file/cuutruyen/uploads/manga/16/cover/processed-0e4aa4337dd41f603b9e321ea5cfedc6.jpg",
-    name: "Dr.Stone (FULL HD)",
-    author: "Riichiro Inagaki, Boichi",
-    category: [
-      "doi-thuong",
-      "gyaru",
-      "comedy",
-      "hai-huoc",
-      "web-comic",
-      "slice-of-life",
-      "yuri",
-      "dang-tien-hanh",
-      "manga",
-    ],
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/21459-yeVkolGKdGUV.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178025-cWJKEsZynkil.jpg",
+    title: "Suzuki Yuto",
+    description:
+      "Một câu chuyện hài hước về cuộc sống hàng ngày của Suzuki Yuto và những người bạn xung quanh.",
+    color: "from-red-800 to-red-400",
   },
   {
-    image:
-      "https://storage-ct.lrclib.net/file/cuutruyen/uploads/manga/152/cover/processed-f7d09a1d2f13b6eb0677d9b811bf10df.jpg",
-    name: "Spy x Family (FULL HD)",
-    author: "Endou Tatsuya",
-    category: [
-      "doi-thuong",
-      "gyaru",
-      "comedy",
-      "hai-huoc",
-      "web-comic",
-      "slice-of-life",
-      "yuri",
-      "dang-tien-hanh",
-      "manga",
-    ],
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178754-pzQw3EJ0DYO9.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178869-ZFn0hKphaLtk.jpg",
+    title: "Sousou no Frieren",
+    description:
+      "Nữ pháp sư Elf - Frieren bất tử và hành trình khám phá bản thân cảm thấy thỏa mãn với đời.",
+    color: "from-green-800 to-green-400",
+  },
+  {
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/113415-jQBSkxWAAk83.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178025-cWJKEsZynkil.jpg",
+    title: "Suzuki Yuto",
+    description:
+      "Một câu chuyện hài hước về cuộc sống hàng ngày của Suzuki Yuto và những người bạn xung quanh.",
+    color: "from-pink-800 to-pink-400",
+  },
+  {
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/1535.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178869-ZFn0hKphaLtk.jpg",
+    title: "Sousou no Frieren",
+    description:
+      "Nữ pháp sư Elf - Frieren bất tử và hành trình khám phá bản thân cảm thấy thỏa mãn với đời.",
+    color: "from-gray-800 to-gray-400",
+  },
+  {
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/21459-yeVkolGKdGUV.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178025-cWJKEsZynkil.jpg",
+    title: "Suzuki Yuto",
+    description:
+      "Một câu chuyện hài hước về cuộc sống hàng ngày của Suzuki Yuto và những người bạn xung quanh.",
+    color: "from-yellow-600 to-yellow-300",
+  },
+  {
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/178869-ZFn0hKphaLtk.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178869-ZFn0hKphaLtk.jpg",
+    title: "Sousou no Frieren",
+    description:
+      "Nữ pháp sư Elf - Frieren bất tử và hành trình khám phá bản thân cảm thấy thỏa mãn với đời.",
+    color: "from-red-800 to-red-400",
+  },
+  {
+    backgroundImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/21459-yeVkolGKdGUV.jpg",
+    overlayImage:
+      "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx178025-cWJKEsZynkil.jpg",
+    title: "Suzuki Yuto",
+    description:
+      "Một câu chuyện hài hước về cuộc sống hàng ngày của Suzuki Yuto và những người bạn xung quanh.",
+    color: "from-red-800 to-red-400",
   },
 ];
 
 export const Banner = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [emblaApi, setEmblaApi] = useState<EmblaCarouselType>();
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setCurrentIndex(emblaApi.selectedScrollSnap());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onSelect(emblaApi);
+    emblaApi.on("reInit", onSelect);
+    emblaApi.on("select", onSelect);
+
+    return () => {
+      emblaApi.off("reInit", onSelect);
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  const getSlideState = (index: number) => {
+    const prevIndex = (currentIndex - 1 + data.length) % data.length;
+    const nextIndex = (currentIndex + 1) % data.length;
+
+    if (index === currentIndex) {
+      return "active";
+    } else if (index === prevIndex || index === nextIndex) {
+      return "side";
+    } else {
+      return "hidden";
+    }
+  };
+
   return (
-    <>
+    <div className="w-full">
+      <div
+        className={`transition-colors duration-700 ease-in-out w-full h-[200px] sm:h-[300px] md:h-[400px] overflow-hidden bg-gradient-to-b ${data[currentIndex].color}`}
+      />
       <Carousel
+        className="relative z-10 mt-[-100px] sm:mt-[-200px] md:mt-[-300px] w-full mx-auto"
         opts={{
-          align: "start",
+          align: "center",
           loop: true,
+          containScroll: false,
         }}
+        setApi={setEmblaApi}
       >
-        <CarouselContent className="">
-          {data.map((_, index) => (
-            <CarouselItem key={index} className="w-full">
-              <div className="w-full">
-                <div className="relative">
-                  <div className="bg-[#52c5ff] absolute inset-0 bg-cover bg-center transition-all duration-2000" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 backdrop-blur-[2px]" />
-                  <div className="relative z-10 flex items-center py-18">
-                    <div className="max-w-7xl mx-auto w-full">
-                      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-8">
-                        <div className="flex-shrink-0 w-full max-w-xs sm:max-w-sm lg:max-w-none lg:w-64">
-                          <div className="relative group">
-                            <Image
-                              src={`${_.image}`}
-                              alt="Manga Cover"
-                              width={140}
-                              height={200}
-                              className="w-[70%] mx-auto aspect-[2/3] object-cover rounded-xl shadow-2xl transition-transform duration-300 group-hover:scale-100"
-                              priority
-                            />
-                          </div>
+        <CarouselContent className="-ml-2 md:-ml-4">
+          {data.map((item, index) => {
+            const slideState = getSlideState(index);
+            const isActive = slideState === "active";
+            const isSide = slideState === "side";
+
+            return (
+              <CarouselItem
+                key={index}
+                className={`pl-2 md:pl-4 transition-all duration-700 ease-out ${
+                  isActive
+                    ? "basis-4/5 md:basis-1/2"
+                    : isSide
+                    ? "basis-1/5 md:basis-1/4"
+                    : "basis-0"
+                }`}
+              >
+                <div
+                  className={`relative w-full h-[250px] sm:h-[400px] md:h-[500px] overflow-hidden transition-all duration-700 ease-out ${
+                    isActive
+                      ? "blur-none opacity-100 scale-100 z-20"
+                      : isSide
+                      ? "blur-sm opacity-40 scale-90 z-10"
+                      : "opacity-0 scale-75 z-0"
+                  }`}
+                >
+                  <div className="absolute top-1 left-1 right-1 bottom-1">
+                    <div
+                      className="w-full h-full bg-cover bg-center rounded-lg transition-all duration-700"
+                      style={{
+                        backgroundImage: `url(${item.backgroundImage})`,
+                      }}
+                    />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-lg transition-opacity duration-700 ${
+                        isActive ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  </div>
+                  {isActive && (
+                    <div className="absolute hidden sm:block bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 lg:p-12 z-30 m-3 transition-all duration-700 opacity-100 translate-y-0">
+                      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                        <div className="max-w-2xl">
+                          <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 drop-shadow-lg">
+                            {item.title}
+                          </h1>
+                          <p className="text-gray-200 text-sm sm:text-base leading-relaxed max-w-lg drop-shadow-md">
+                            {item.description}
+                          </p>
                         </div>
-                        <div className="flex-1 text-center lg:text-left max-w-2xl">
-                          <div className="space-y-4">
-                            <div>
-                              <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-white leading-tight mb-2">
-                                {_.name}
-                              </h1>
-                              <div className="flex items-center justify-center lg:justify-start gap-2 text-yellow-400">
-                                {[...Array(5)].map((_, i) => (
-                                  <Star
-                                    key={i}
-                                    className="w-4 h-4 fill-current"
-                                  />
-                                ))}
-                                <span className="text-white/80 ml-2 text-sm">
-                                  (4.8)
-                                </span>
-                              </div>
-                            </div>
-                            <div className="space-y-1">
-                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-300">
-                                <span className="text-white/60 text-xs uppercase tracking-wider">
-                                  Artist:
-                                </span>
-                                <span className="text-base font-medium">
-                                  りーちゃん
-                                </span>
-                              </div>
-                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-gray-300">
-                                <span className="text-white/60 text-xs uppercase tracking-wider">
-                                  Author:
-                                </span>
-                                <span className="text-base font-medium">
-                                  {_.author}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="flex flex-wrap justify-center lg:justify-start gap-1">
-                              {_.category.slice(0, 6).map((genre) => (
-                                <span
-                                  key={genre}
-                                  className="px-2 py-1 bg-white/10 backdrop-blur-sm text-white text-xs rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
-                                >
-                                  {genre}
-                                </span>
-                              ))}
-                            </div>
-                            <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-xs text-white/80">
-                              <div className="flex items-center gap-1">
-                                <BookOpen className="w-3 h-3" />
-                                <span>250 Chapters</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Calendar className="w-3 h-3" />
-                                <span>Ongoing</span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                              <ButtonBanner
-                                bg="bg-blue-600"
-                                hover="hover:bg-blue-700"
-                                icon={<BookOpen />}
-                                text="Read Now"
-                              />
-                              <button className="border-white/30 text-white hover:bg-white/10 px-6 py-2 text-sm backdrop-blur-sm rounded-lg transition-all duration-200 hover:scale-105 bg-transparent">
-                                Add to Library
-                              </button>
-                            </div>
-                          </div>
+                        <div className="flex-shrink-0">
+                          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 md:px-8 md:py-3 text-sm md:text-base font-medium rounded-lg transition-all duration-200 hover:scale-105 shadow-lg">
+                            XEM THÔNG TIN
+                          </Button>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-gray-900 to-transparent z-10" />
+                  )}
                 </div>
-              </div>
-            </CarouselItem>
-          ))}
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
       </Carousel>
-    </>
+
+      {/* Debug info */}
+      <div className="text-center mt-4 text-sm text-gray-600">
+        Current slide: {currentIndex + 1} / {data.length}
+      </div>
+    </div>
   );
 };

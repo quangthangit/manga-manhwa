@@ -7,7 +7,7 @@ import SkeletoMangaHomePage from "./components/Skeleto/SkeletoMangaHomePage";
 export default function HomePage() {
   return (
     <div className="w-full select-none">
-      <div className="relative">
+      <div className="w-full">
         <Banner />
       </div>
       <section className="text-[#1f2937] bg-transparent py-12 px-4 sm:px-6 lg:px-8 relative z-10">
@@ -20,7 +20,7 @@ export default function HomePage() {
               </button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-4 lg:gap-6 mb-20">
             <Suspense
               fallback={Array.from({ length: 16 }).map((_, idx) => (
                 <SkeletoMangaHomePage key={idx} />
